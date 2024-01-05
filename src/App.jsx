@@ -15,7 +15,7 @@ function App() {
 	const handleNumberChange = (event) => {
 		const numRows = event.target.valueAsNumber
 		console.log(numRows);
-		setNumPracticeItems(numRows + 1);
+		setNumPracticeItems(numRows);
 	}
 
   const handleFileChange = (event) => {
@@ -41,7 +41,7 @@ function App() {
 
 		const rowIndicesToDisplay = new Set()
 		while (rowIndicesToDisplay.size < numPracticeItems) {
-			rowIndicesToDisplay.add(getRandomInt(1, numLines))
+			rowIndicesToDisplay.add(getRandomInt(1, numLines - 2))
 		}
 		console.log(rowIndicesToDisplay);
 
@@ -49,6 +49,10 @@ function App() {
 	
 		for (let i = 0; i < rowIndicesToDisplay.size; i++) {
 			const lineIndex = iterator1.next().value;
+			// When the value is 14, the last practice item doesn't 
+			// get included, and the number of practice items is one less
+			// than expected.
+			// Use a bunch of logging statements, or try to use the debugger.
 			const currentLine = lines[lineIndex].split(",");
 	
 			if (currentLine.length === headers.length) {
@@ -67,7 +71,7 @@ function App() {
 		<div>
 			<div style={{ marginBottom: "15px" }}>
 				<input type="number" onChange={handleNumberChange}></input>
-				<p>Youll have <span>{numPracticeItems - 1}</span> things to practice.</p>
+				<p>Youll have <span>{numPracticeItems}</span> things to practice.</p>
 				<input type="file" onChange={handleFileChange} accept=".csv" />
 			</div>
 			<CSVDataTable data={csvData} />
