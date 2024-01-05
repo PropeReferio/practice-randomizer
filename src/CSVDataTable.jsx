@@ -59,6 +59,7 @@ const tableCellStyle = {
   borderBottom: "1px solid #ddd",
   padding: "15px",
   backgroundColor: "#fff",
+	textAlign: "left",
 };
 
 export default CSVDataTable;

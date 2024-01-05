@@ -19,19 +19,34 @@ function App() {
 	}
 
   const handleFileChange = (event) => {
-	const file = event.target.files[0];
-  
-	if (file) {
-		const reader = new FileReader();
-  
-		reader.onload = (e) => {
-			const csvText = e.target.result;
-			parseCSV(csvText);
-		};
-  
-		reader.readAsText(file);
-	}
+		const file = event.target.files[0];
+		
+		if (file) {
+			const reader = new FileReader();
+		
+			reader.onload = (e) => {
+				const csvText = e.target.result;
+				parseCSV(csvText);
+			};
+		
+			reader.readAsText(file);
+		}
   };
+
+	const shuffleData = (event) => {
+		const file = document.getElementById("file_input").files[0]
+
+		if (file) {
+			const reader = new FileReader();
+		
+			reader.onload = (e) => {
+				const csvText = e.target.result;
+				parseCSV(csvText);
+			};
+		
+			reader.readAsText(file);
+		}
+	};
 
 	const parseCSV = (csvText) => {
 		const lines = csvText.split("\n");
@@ -72,7 +87,8 @@ function App() {
 			<div style={{ marginBottom: "15px" }}>
 				<input type="number" onChange={handleNumberChange}></input>
 				<p>Youll have <span>{numPracticeItems}</span> things to practice.</p>
-				<input type="file" onChange={handleFileChange} accept=".csv" />
+				<input type="file" id="file_input" onChange={handleFileChange} accept=".csv" />
+				<input type="button" value="Shuffle" onClick={shuffleData} />
 			</div>
 			<CSVDataTable data={csvData} />
 		</div>
